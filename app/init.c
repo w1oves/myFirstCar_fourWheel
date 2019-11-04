@@ -4,6 +4,7 @@
 void init(void)
 {
     uart_init();
+    switch_init();
 }
 
 /********************对串口通信进行初始化********************/
@@ -23,4 +24,15 @@ void uart_init(void)
     LPLD_UART_EnableIrq(uart_init_struct);    //中断使能
                                               //
     uartCom = UART4;                          //端口设置
+}
+
+/********************对拨码开关进行初始化********************/
+GPIO_InitTypeDef gpio_switch_struct;
+void switch_init(void)
+{
+    gpio_switch_struct.GPIO_PTx = PTD;                               //规定端口为PORTD
+    gpio_switch_struct.GPIO_Pins = GPIO_Pin0_7;                      //规定
+    gpio_switch_struct.GPIO_Dir = DIR_INPUT;                         //输入
+    gpio_switch_struct.GPIO_PinControl = INPUT_PULL_DOWN | IRQC_DIS; //输入内部下拉，禁止中断和DMA请求
+    LPLD_GPIO_Init(gpio_switch_struct);
 }
