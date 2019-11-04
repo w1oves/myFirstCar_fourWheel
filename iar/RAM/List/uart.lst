@@ -5,11 +5,10 @@
 #
 #    Cpu mode     =  thumb
 #    Endian       =  little
-#    Source file  =  
-#        D:\Study\car\myFirstCar\myFirstCar_fourWheel\app\myFirstCar.c
+#    Source file  =  D:\Study\car\myFirstCar\myFirstCar_fourWheel\app\uart.c
 #    Command line =  
-#        D:\Study\car\myFirstCar\myFirstCar_fourWheel\app\myFirstCar.c -D
-#        LPLD_K60 -D USE_K60DZ10 -lCN
+#        D:\Study\car\myFirstCar\myFirstCar_fourWheel\app\uart.c -D LPLD_K60 -D
+#        USE_K60DZ10 -lCN
 #        D:\Study\car\myFirstCar\myFirstCar_fourWheel\iar\RAM\List\ -lB
 #        D:\Study\car\myFirstCar\myFirstCar_fourWheel\iar\RAM\List\ -o
 #        D:\Study\car\myFirstCar\myFirstCar_fourWheel\iar\RAM\Obj\ --no_cse
@@ -44,42 +43,36 @@
 #        D:\Study\car\myFirstCar\myFirstCar_fourWheel\iar\..\..\..\lib\USB\class\
 #        -Ol -I "D:\Study Software\arm\CMSIS\Include\" -D ARM_MATH_CM4
 #    List file    =  
-#        D:\Study\car\myFirstCar\myFirstCar_fourWheel\iar\RAM\List\myFirstCar.lst
+#        D:\Study\car\myFirstCar\myFirstCar_fourWheel\iar\RAM\List\uart.lst
 #    Object file  =  
-#        D:\Study\car\myFirstCar\myFirstCar_fourWheel\iar\RAM\Obj\myFirstCar.o
+#        D:\Study\car\myFirstCar\myFirstCar_fourWheel\iar\RAM\Obj\uart.o
 #
 ###############################################################################
 
-D:\Study\car\myFirstCar\myFirstCar_fourWheel\app\myFirstCar.c
-      1          #include "common.h"
-      2          
+D:\Study\car\myFirstCar\myFirstCar_fourWheel\app\uart.c
+      1          #include"include.h"
+      2          //待解决：uartCom
 
    \                                 In section .text, align 2, keep-with-next
-      3          void main (void)
+      3          void uartIsr()
       4          {
-      5          
-      6            while(1)
-   \                     main: (+1)
-   \                     ??main_0: (+1)
-   \   00000000   0xE7FE             B.N      ??main_0
-      7            {
-      8          
-      9            } 
-     10          }
-     11          
+      5              
+      6          }
+   \                     uartIsr: (+1)
+   \   00000000   0x4770             BX       LR               ;; return
 
    Maximum stack usage in bytes:
 
    .cstack Function
    ------- --------
-       0   main
+       0   uartIsr
 
 
    Section sizes:
 
    Bytes  Function/Label
    -----  --------------
-       2  main
+       2  uartIsr
 
  
  2 bytes in section .text

@@ -25,7 +25,7 @@ if not "%1" == "" goto debugFile
 
 @echo on 
 
-"D:\Study Software\common\bin\cspybat" -f "D:\Study\car\myFirstCar\iar\settings\myFirstCar_K60DZ10.RAM.general.xcl" --backend -f "D:\Study\car\myFirstCar\iar\settings\myFirstCar_K60DZ10.RAM.driver.xcl" 
+"D:\Study Software\common\bin\cspybat" -f "D:\Study\car\myFirstCar\myFirstCar_fourWheel\iar\settings\myFirstCar_K60DZ10.RAM.general.xcl" --backend -f "D:\Study\car\myFirstCar\myFirstCar_fourWheel\iar\settings\myFirstCar_K60DZ10.RAM.driver.xcl" 
 
 @echo off 
 goto end 
@@ -34,7 +34,7 @@ goto end
 
 @echo on 
 
-"D:\Study Software\common\bin\cspybat" -f "D:\Study\car\myFirstCar\iar\settings\myFirstCar_K60DZ10.RAM.general.xcl" "--debug_file=%1" --backend -f "D:\Study\car\myFirstCar\iar\settings\myFirstCar_K60DZ10.RAM.driver.xcl" 
+"D:\Study Software\common\bin\cspybat" -f "D:\Study\car\myFirstCar\myFirstCar_fourWheel\iar\settings\myFirstCar_K60DZ10.RAM.general.xcl" "--debug_file=%1" --backend -f "D:\Study\car\myFirstCar\myFirstCar_fourWheel\iar\settings\myFirstCar_K60DZ10.RAM.driver.xcl" 
 
 @echo off 
 :end
