@@ -5,11 +5,10 @@
 //
 //    Cpu mode     =  thumb
 //    Endian       =  little
-//    Source file  =  
-//        D:\Study\car\myFirstCar\myFirstCar_fourWheel\app\myFirstCar.c
+//    Source file  =  D:\Study\car\myFirstCar\myFirstCar_fourWheel\app\motor.c
 //    Command line =  
-//        D:\Study\car\myFirstCar\myFirstCar_fourWheel\app\myFirstCar.c -D
-//        LPLD_K60 -D USE_K60DZ10 -lCN
+//        D:\Study\car\myFirstCar\myFirstCar_fourWheel\app\motor.c -D LPLD_K60
+//        -D USE_K60DZ10 -lCN
 //        D:\Study\car\myFirstCar\myFirstCar_fourWheel\iar\RAM\List\ -lB
 //        D:\Study\car\myFirstCar\myFirstCar_fourWheel\iar\RAM\List\ -o
 //        D:\Study\car\myFirstCar\myFirstCar_fourWheel\iar\RAM\Obj\ --no_cse
@@ -45,38 +44,13 @@
 //        D:\Study\car\myFirstCar\myFirstCar_fourWheel\iar\..\..\..\lib\USB\class\
 //        -Ol -I "D:\Study Software\arm\CMSIS\Include\" -D ARM_MATH_CM4
 //    List file    =  
-//        D:\Study\car\myFirstCar\myFirstCar_fourWheel\iar\RAM\List\myFirstCar.s
+//        D:\Study\car\myFirstCar\myFirstCar_fourWheel\iar\RAM\List\motor.s
 //
 ///////////////////////////////////////////////////////////////////////////////
 
         #define SHT_PROGBITS 0x1
 
-        EXTERN init
 
-        PUBLIC main
-
-// D:\Study\car\myFirstCar\myFirstCar_fourWheel\app\myFirstCar.c
-//    1 #include"include.h"
-//    2 
-
-        SECTION `.text`:CODE:NOROOT(1)
-        THUMB
-//    3 void main(void)
-//    4 {
-main:
-        PUSH     {R7,LR}
-//    5   DisableInterrupts; //关闭中断
-        CPSID    I
-//    6   init();            //初始化函数
-        BL       init
-//    7   EnableInterrupts;  //启动中断
-        CPSIE    I
-//    8   while (1)
-??main_0:
-        B.N      ??main_0
-//    9   {
-//   10   }
-//   11 }
 
         SECTION `.iar_vfe_header`:DATA:NOALLOC:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
@@ -90,10 +64,12 @@ main:
         SECTION_TYPE SHT_PROGBITS, 0
 
         END
+// D:\Study\car\myFirstCar\myFirstCar_fourWheel\app\motor.c
+//    1 #include"include.h"
 // 
-// 12 bytes in section .text
+//
 // 
-// 12 bytes of CODE memory
+//
 //
 //Errors: none
 //Warnings: none

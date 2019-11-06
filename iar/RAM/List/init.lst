@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.40.3.8902/W32 for ARM        04/Nov/2019  20:05:20
+# IAR ANSI C/C++ Compiler V7.40.3.8902/W32 for ARM        04/Nov/2019  22:01:29
 # Copyright 1999-2015 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -61,83 +61,296 @@ D:\Study\car\myFirstCar\myFirstCar_fourWheel\app\init.c
    \   00000000   0xB580             PUSH     {R7,LR}
       6              uart_init();
    \   00000002   0x.... 0x....      BL       uart_init
-      7          }
-   \   00000006   0xBD01             POP      {R0,PC}          ;; return
-      8          
-      9          /********************对串口通信进行初始化********************/
+      7              switch_init();
+   \   00000006   0x.... 0x....      BL       switch_init
+      8              motor_init();
+   \   0000000A   0x.... 0x....      BL       motor_init
+      9          }
+   \   0000000E   0xBD01             POP      {R0,PC}          ;; return
+     10          
+     11          /********************对串口通信进行初始化********************/
 
    \                                 In section .bss, align 4
-     10          UART_InitTypeDef uart_init_struct;
+     12          UART_InitTypeDef uart_init_struct; //串口初始化结构体
    \                     uart_init_struct:
    \   00000000                      DS8 28
-     11          //有线串口通信初始化函数
+
+   \                                 In section .bss, align 4
+     13          UART_Type *uartCom;                //串口使用端口
+   \                     uartCom:
+   \   00000000                      DS8 4
+     14          //串口通信初始化函数
 
    \                                 In section .text, align 2, keep-with-next
-     12          void uart_init(void)
-     13          {
+     15          void uart_init(void)
+     16          {
    \                     uart_init: (+1)
    \   00000000   0xB5E0             PUSH     {R5-R7,LR}
-     14              uart_init_struct.UART_Uartx = UART4;      //端口
-   \   00000002   0x....             LDR.N    R0,??DataTable0  ;; 0x400ea000
-   \   00000004   0x....             LDR.N    R1,??DataTable0_1
+     17              //有线串口通信初始化
+     18              uart_init_struct.UART_Uartx = UART4;      //端口
+   \   00000002   0x....             LDR.N    R0,??DataTable2  ;; 0x400ea000
+   \   00000004   0x....             LDR.N    R1,??DataTable2_1
    \   00000006   0x6008             STR      R0,[R1, #+0]
-     15              uart_init_struct.UART_BaudRate = 115200;  //波特率
+     19              uart_init_struct.UART_BaudRate = 115200;  //波特率
    \   00000008   0xF45F 0x30E1      MOVS     R0,#+115200
-   \   0000000C   0x....             LDR.N    R1,??DataTable0_1
+   \   0000000C   0x....             LDR.N    R1,??DataTable2_1
    \   0000000E   0x6048             STR      R0,[R1, #+4]
-     16              uart_init_struct.UART_RxPin = PTE25;      //Rx引脚
+     20              uart_init_struct.UART_RxPin = PTE25;      //Rx引脚
    \   00000010   0x2095             MOVS     R0,#+149
-   \   00000012   0x....             LDR.N    R1,??DataTable0_1
+   \   00000012   0x....             LDR.N    R1,??DataTable2_1
    \   00000014   0x7248             STRB     R0,[R1, #+9]
-     17              uart_init_struct.UART_TxPin = PTE24;      //Tx引脚
+     21              uart_init_struct.UART_TxPin = PTE24;      //Tx引脚
    \   00000016   0x2094             MOVS     R0,#+148
-   \   00000018   0x....             LDR.N    R1,??DataTable0_1
+   \   00000018   0x....             LDR.N    R1,??DataTable2_1
    \   0000001A   0x7208             STRB     R0,[R1, #+8]
-     18              uart_init_struct.UART_RxIntEnable = TRUE; //使能接收中断
+     22              uart_init_struct.UART_RxIntEnable = TRUE; //使能接收中断
    \   0000001C   0x2001             MOVS     R0,#+1
-   \   0000001E   0x....             LDR.N    R1,??DataTable0_1
+   \   0000001E   0x....             LDR.N    R1,??DataTable2_1
    \   00000020   0x7288             STRB     R0,[R1, #+10]
-     19              uart_init_struct.UART_RxIsr = uartIsr;    //设置接收中断函数
-   \   00000022   0x....             LDR.N    R0,??DataTable0_2
-   \   00000024   0x....             LDR.N    R1,??DataTable0_1
+     23              uart_init_struct.UART_RxIsr = uartIsr;    //设置接收中断函数
+   \   00000022   0x....             LDR.N    R0,??DataTable2_2
+   \   00000024   0x....             LDR.N    R1,??DataTable2_1
    \   00000026   0x6148             STR      R0,[R1, #+20]
-     20              LPLD_UART_Init(uart_init_struct);         //初始化
-   \   00000028   0x....             LDR.N    R1,??DataTable0_1
+     24              LPLD_UART_Init(uart_init_struct);         //初始化
+   \   00000028   0x....             LDR.N    R1,??DataTable2_1
    \   0000002A   0xB084             SUB      SP,SP,#+16
    \   0000002C   0x4668             MOV      R0,SP
    \   0000002E   0x221C             MOVS     R2,#+28
    \   00000030   0x.... 0x....      BL       __aeabi_memcpy4
    \   00000034   0xBC0F             POP      {R0-R3}
    \   00000036   0x.... 0x....      BL       LPLD_UART_Init
-     21              LPLD_UART_EnableIrq(uart_init_struct);    //中断使能
-   \   0000003A   0x....             LDR.N    R1,??DataTable0_1
+     25              LPLD_UART_EnableIrq(uart_init_struct);    //中断使能
+   \   0000003A   0x....             LDR.N    R1,??DataTable2_1
    \   0000003C   0xB084             SUB      SP,SP,#+16
    \   0000003E   0x4668             MOV      R0,SP
    \   00000040   0x221C             MOVS     R2,#+28
    \   00000042   0x.... 0x....      BL       __aeabi_memcpy4
    \   00000046   0xBC0F             POP      {R0-R3}
    \   00000048   0x.... 0x....      BL       LPLD_UART_EnableIrq
-     22          }
-   \   0000004C   0xBD07             POP      {R0-R2,PC}       ;; return
+     26                                                        //
+     27              uartCom = UART4;                          //端口设置
+   \   0000004C   0x....             LDR.N    R0,??DataTable2  ;; 0x400ea000
+   \   0000004E   0x....             LDR.N    R1,??DataTable2_3
+   \   00000050   0x6008             STR      R0,[R1, #+0]
+     28          }
+   \   00000052   0xBD07             POP      {R0-R2,PC}       ;; return
+     29          
+     30          /********************对拨码开关进行初始化********************/
+
+   \                                 In section .bss, align 4
+     31          GPIO_InitTypeDef gpio_switch_struct;
+   \                     gpio_switch_struct:
+   \   00000000                      DS8 20
+
+   \                                 In section .text, align 2, keep-with-next
+     32          void switch_init(void)
+     33          {
+   \                     switch_init: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+     34              gpio_switch_struct.GPIO_PTx = PTD;                               //规定端口为PORTD
+   \   00000002   0x....             LDR.N    R0,??DataTable2_4  ;; 0x400ff0c0
+   \   00000004   0x....             LDR.N    R1,??DataTable2_5
+   \   00000006   0x6008             STR      R0,[R1, #+0]
+     35              gpio_switch_struct.GPIO_Pins = GPIO_Pin0_7;                      //规定
+   \   00000008   0x20FF             MOVS     R0,#+255
+   \   0000000A   0x....             LDR.N    R1,??DataTable2_5
+   \   0000000C   0x6048             STR      R0,[R1, #+4]
+     36              gpio_switch_struct.GPIO_Dir = DIR_INPUT;                         //输入
+   \   0000000E   0x2000             MOVS     R0,#+0
+   \   00000010   0x....             LDR.N    R1,??DataTable2_5
+   \   00000012   0x7308             STRB     R0,[R1, #+12]
+     37              gpio_switch_struct.GPIO_PinControl = INPUT_PULL_DOWN | IRQC_DIS; //输入内部下拉，禁止中断和DMA请求
+   \   00000014   0x2002             MOVS     R0,#+2
+   \   00000016   0x....             LDR.N    R1,??DataTable2_5
+   \   00000018   0x6088             STR      R0,[R1, #+8]
+     38              LPLD_GPIO_Init(gpio_switch_struct);
+   \   0000001A   0x....             LDR.N    R1,??DataTable2_5
+   \   0000001C   0xB084             SUB      SP,SP,#+16
+   \   0000001E   0x4668             MOV      R0,SP
+   \   00000020   0x2214             MOVS     R2,#+20
+   \   00000022   0x.... 0x....      BL       __aeabi_memcpy4
+   \   00000026   0xBC0F             POP      {R0-R3}
+   \   00000028   0x.... 0x....      BL       LPLD_GPIO_Init
+     39          }
+   \   0000002C   0xBD01             POP      {R0,PC}          ;; return
+     40          
+     41          /********************对电机模块进行初始化********************/
+
+   \                                 In section .bss, align 4
+     42          FTM_InitTypeDef ftm_motor_init_struct;
+   \                     ftm_motor_init_struct:
+   \   00000000                      DS8 28
+
+   \                                 In section .text, align 2, keep-with-next
+     43          void motor_init(void)
+     44          {
+   \                     motor_init: (+1)
+   \   00000000   0xB5E0             PUSH     {R5-R7,LR}
+     45              ftm_motor_init_struct.FTM_Ftmx = FTM0;                   //电机 左  PTC1    ftm_motor_ch0
+   \   00000002   0x....             LDR.N    R0,??DataTable2_6  ;; 0x40038000
+   \   00000004   0x....             LDR.N    R1,??DataTable2_7
+   \   00000006   0x6008             STR      R0,[R1, #+0]
+     46              ftm_motor_init_struct.FTM_Mode = FTM_MODE_PWM;           //设置为PWM输出模式
+   \   00000008   0x2001             MOVS     R0,#+1
+   \   0000000A   0x....             LDR.N    R1,??DataTable2_7
+   \   0000000C   0x7108             STRB     R0,[R1, #+4]
+     47              ftm_motor_init_struct.FTM_PwmFreq = 10000;               //设置输出频率为10000HZ
+   \   0000000E   0xF242 0x7010      MOVW     R0,#+10000
+   \   00000012   0x....             LDR.N    R1,??DataTable2_7
+   \   00000014   0x6088             STR      R0,[R1, #+8]
+     48              LPLD_FTM_Init(ftm_motor_init_struct);                    //初始化
+   \   00000016   0x....             LDR.N    R1,??DataTable2_7
+   \   00000018   0xB084             SUB      SP,SP,#+16
+   \   0000001A   0x4668             MOV      R0,SP
+   \   0000001C   0x221C             MOVS     R2,#+28
+   \   0000001E   0x.... 0x....      BL       __aeabi_memcpy4
+   \   00000022   0xBC0F             POP      {R0-R3}
+   \   00000024   0x.... 0x....      BL       LPLD_FTM_Init
+     49              LPLD_FTM_PWM_Enable(FTM0, FTM_Ch0, 0, PTC1, ALIGN_LEFT); //启用FTM0_ch0通道，初始占空比为0，对应引脚为PTC1，脉冲对齐方式为左对齐
+   \   00000028   0x2028             MOVS     R0,#+40
+   \   0000002A   0x9000             STR      R0,[SP, #+0]
+   \   0000002C   0x233D             MOVS     R3,#+61
+   \   0000002E   0x2200             MOVS     R2,#+0
+   \   00000030   0x2100             MOVS     R1,#+0
+   \   00000032   0x....             LDR.N    R0,??DataTable2_6  ;; 0x40038000
+   \   00000034   0x.... 0x....      BL       LPLD_FTM_PWM_Enable
+     50                                                                       //
+     51              ftm_motor_init_struct.FTM_Ftmx = FTM0;                   //电机  左  PTC2    ftm_motor_ch1
+   \   00000038   0x....             LDR.N    R0,??DataTable2_6  ;; 0x40038000
+   \   0000003A   0x....             LDR.N    R1,??DataTable2_7
+   \   0000003C   0x6008             STR      R0,[R1, #+0]
+     52              ftm_motor_init_struct.FTM_Mode = FTM_MODE_PWM;           //
+   \   0000003E   0x2001             MOVS     R0,#+1
+   \   00000040   0x....             LDR.N    R1,??DataTable2_7
+   \   00000042   0x7108             STRB     R0,[R1, #+4]
+     53              ftm_motor_init_struct.FTM_PwmFreq = 10000;               //
+   \   00000044   0xF242 0x7010      MOVW     R0,#+10000
+   \   00000048   0x....             LDR.N    R1,??DataTable2_7
+   \   0000004A   0x6088             STR      R0,[R1, #+8]
+     54              LPLD_FTM_Init(ftm_motor_init_struct);                    //
+   \   0000004C   0x....             LDR.N    R1,??DataTable2_7
+   \   0000004E   0xB084             SUB      SP,SP,#+16
+   \   00000050   0x4668             MOV      R0,SP
+   \   00000052   0x221C             MOVS     R2,#+28
+   \   00000054   0x.... 0x....      BL       __aeabi_memcpy4
+   \   00000058   0xBC0F             POP      {R0-R3}
+   \   0000005A   0x.... 0x....      BL       LPLD_FTM_Init
+     55              LPLD_FTM_PWM_Enable(FTM0, FTM_Ch1, 0, PTC2, ALIGN_LEFT); //
+   \   0000005E   0x2028             MOVS     R0,#+40
+   \   00000060   0x9000             STR      R0,[SP, #+0]
+   \   00000062   0x233E             MOVS     R3,#+62
+   \   00000064   0x2200             MOVS     R2,#+0
+   \   00000066   0x2101             MOVS     R1,#+1
+   \   00000068   0x....             LDR.N    R0,??DataTable2_6  ;; 0x40038000
+   \   0000006A   0x.... 0x....      BL       LPLD_FTM_PWM_Enable
+     56                                                                       //
+     57              ftm_motor_init_struct.FTM_Ftmx = FTM0;                   //电机  右  PTC3    ftm_motor_ch2
+   \   0000006E   0x....             LDR.N    R0,??DataTable2_6  ;; 0x40038000
+   \   00000070   0x....             LDR.N    R1,??DataTable2_7
+   \   00000072   0x6008             STR      R0,[R1, #+0]
+     58              ftm_motor_init_struct.FTM_Mode = FTM_MODE_PWM;           //
+   \   00000074   0x2001             MOVS     R0,#+1
+   \   00000076   0x....             LDR.N    R1,??DataTable2_7
+   \   00000078   0x7108             STRB     R0,[R1, #+4]
+     59              ftm_motor_init_struct.FTM_PwmFreq = 10000;               //
+   \   0000007A   0xF242 0x7010      MOVW     R0,#+10000
+   \   0000007E   0x....             LDR.N    R1,??DataTable2_7
+   \   00000080   0x6088             STR      R0,[R1, #+8]
+     60              LPLD_FTM_Init(ftm_motor_init_struct);                    //
+   \   00000082   0x....             LDR.N    R1,??DataTable2_7
+   \   00000084   0xB084             SUB      SP,SP,#+16
+   \   00000086   0x4668             MOV      R0,SP
+   \   00000088   0x221C             MOVS     R2,#+28
+   \   0000008A   0x.... 0x....      BL       __aeabi_memcpy4
+   \   0000008E   0xBC0F             POP      {R0-R3}
+   \   00000090   0x.... 0x....      BL       LPLD_FTM_Init
+     61              LPLD_FTM_PWM_Enable(FTM0, FTM_Ch2, 0, PTC3, ALIGN_LEFT); //
+   \   00000094   0x2028             MOVS     R0,#+40
+   \   00000096   0x9000             STR      R0,[SP, #+0]
+   \   00000098   0x233F             MOVS     R3,#+63
+   \   0000009A   0x2200             MOVS     R2,#+0
+   \   0000009C   0x2102             MOVS     R1,#+2
+   \   0000009E   0x....             LDR.N    R0,??DataTable2_6  ;; 0x40038000
+   \   000000A0   0x.... 0x....      BL       LPLD_FTM_PWM_Enable
+     62          
+     63              ftm_motor_init_struct.FTM_Ftmx = FTM0;                   //电机  右  PTC4    ftm_motor_ch3
+   \   000000A4   0x....             LDR.N    R0,??DataTable2_6  ;; 0x40038000
+   \   000000A6   0x....             LDR.N    R1,??DataTable2_7
+   \   000000A8   0x6008             STR      R0,[R1, #+0]
+     64              ftm_motor_init_struct.FTM_Mode = FTM_MODE_PWM;           //
+   \   000000AA   0x2001             MOVS     R0,#+1
+   \   000000AC   0x....             LDR.N    R1,??DataTable2_7
+   \   000000AE   0x7108             STRB     R0,[R1, #+4]
+     65              ftm_motor_init_struct.FTM_PwmFreq = 10000;               //
+   \   000000B0   0xF242 0x7010      MOVW     R0,#+10000
+   \   000000B4   0x....             LDR.N    R1,??DataTable2_7
+   \   000000B6   0x6088             STR      R0,[R1, #+8]
+     66              LPLD_FTM_Init(ftm_motor_init_struct);                    //
+   \   000000B8   0x....             LDR.N    R1,??DataTable2_7
+   \   000000BA   0xB084             SUB      SP,SP,#+16
+   \   000000BC   0x4668             MOV      R0,SP
+   \   000000BE   0x221C             MOVS     R2,#+28
+   \   000000C0   0x.... 0x....      BL       __aeabi_memcpy4
+   \   000000C4   0xBC0F             POP      {R0-R3}
+   \   000000C6   0x.... 0x....      BL       LPLD_FTM_Init
+     67              LPLD_FTM_PWM_Enable(FTM0, FTM_Ch3, 0, PTC4, ALIGN_LEFT); //
+   \   000000CA   0x2028             MOVS     R0,#+40
+   \   000000CC   0x9000             STR      R0,[SP, #+0]
+   \   000000CE   0x2340             MOVS     R3,#+64
+   \   000000D0   0x2200             MOVS     R2,#+0
+   \   000000D2   0x2103             MOVS     R1,#+3
+   \   000000D4   0x....             LDR.N    R0,??DataTable2_6  ;; 0x40038000
+   \   000000D6   0x.... 0x....      BL       LPLD_FTM_PWM_Enable
+     68          }
+   \   000000DA   0xBD07             POP      {R0-R2,PC}       ;; return
 
    \                                 In section .text, align 4, keep-with-next
-   \                     ??DataTable0:
+   \                     ??DataTable2:
    \   00000000   0x400EA000         DC32     0x400ea000
 
    \                                 In section .text, align 4, keep-with-next
-   \                     ??DataTable0_1:
+   \                     ??DataTable2_1:
    \   00000000   0x........         DC32     uart_init_struct
 
    \                                 In section .text, align 4, keep-with-next
-   \                     ??DataTable0_2:
+   \                     ??DataTable2_2:
    \   00000000   0x........         DC32     uartIsr
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2_3:
+   \   00000000   0x........         DC32     uartCom
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2_4:
+   \   00000000   0x400FF0C0         DC32     0x400ff0c0
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2_5:
+   \   00000000   0x........         DC32     gpio_switch_struct
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2_6:
+   \   00000000   0x40038000         DC32     0x40038000
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2_7:
+   \   00000000   0x........         DC32     ftm_motor_init_struct
 
    Maximum stack usage in bytes:
 
    .cstack Function
    ------- --------
        8   init
+         8   -> motor_init
+         8   -> switch_init
          8   -> uart_init
+      32   motor_init
+        16   -> LPLD_FTM_Init
+        16   -> LPLD_FTM_PWM_Enable
+        32   -> __aeabi_memcpy4
+      24   switch_init
+         8   -> LPLD_GPIO_Init
+        24   -> __aeabi_memcpy4
       32   uart_init
         16   -> LPLD_UART_EnableIrq
         16   -> LPLD_UART_Init
@@ -148,19 +361,29 @@ D:\Study\car\myFirstCar\myFirstCar_fourWheel\app\init.c
 
    Bytes  Function/Label
    -----  --------------
-       4  ??DataTable0
-       4  ??DataTable0_1
-       4  ??DataTable0_2
-       8  init
-      78  uart_init
+       4  ??DataTable2
+       4  ??DataTable2_1
+       4  ??DataTable2_2
+       4  ??DataTable2_3
+       4  ??DataTable2_4
+       4  ??DataTable2_5
+       4  ??DataTable2_6
+       4  ??DataTable2_7
+      28  ftm_motor_init_struct
+      20  gpio_switch_struct
+      16  init
+     220  motor_init
+      46  switch_init
+       4  uartCom
+      84  uart_init
       28  uart_init_struct
 
  
- 28 bytes in section .bss
- 98 bytes in section .text
+  80 bytes in section .bss
+ 398 bytes in section .text
  
- 98 bytes of CODE memory
- 28 bytes of DATA memory
+ 398 bytes of CODE memory
+  80 bytes of DATA memory
 
 Errors: none
 Warnings: none

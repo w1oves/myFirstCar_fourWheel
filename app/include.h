@@ -3,6 +3,7 @@
 #include "init.h"
 #include "uart.h"
 #include "switch.h"
+#include "motor.h"
 
 /********************串口变量********************/
 extern UART_Type *uartCom;

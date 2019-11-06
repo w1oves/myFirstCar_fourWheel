@@ -5,11 +5,10 @@
 //
 //    Cpu mode     =  thumb
 //    Endian       =  little
-//    Source file  =  
-//        D:\Study\car\myFirstCar\myFirstCar_fourWheel\app\myFirstCar.c
+//    Source file  =  D:\Study\car\myFirstCar\myFirstCar_fourWheel\app\switch.c
 //    Command line =  
-//        D:\Study\car\myFirstCar\myFirstCar_fourWheel\app\myFirstCar.c -D
-//        LPLD_K60 -D USE_K60DZ10 -lCN
+//        D:\Study\car\myFirstCar\myFirstCar_fourWheel\app\switch.c -D LPLD_K60
+//        -D USE_K60DZ10 -lCN
 //        D:\Study\car\myFirstCar\myFirstCar_fourWheel\iar\RAM\List\ -lB
 //        D:\Study\car\myFirstCar\myFirstCar_fourWheel\iar\RAM\List\ -o
 //        D:\Study\car\myFirstCar\myFirstCar_fourWheel\iar\RAM\Obj\ --no_cse
@@ -45,38 +44,25 @@
 //        D:\Study\car\myFirstCar\myFirstCar_fourWheel\iar\..\..\..\lib\USB\class\
 //        -Ol -I "D:\Study Software\arm\CMSIS\Include\" -D ARM_MATH_CM4
 //    List file    =  
-//        D:\Study\car\myFirstCar\myFirstCar_fourWheel\iar\RAM\List\myFirstCar.s
+//        D:\Study\car\myFirstCar\myFirstCar_fourWheel\iar\RAM\List\switch.s
 //
 ///////////////////////////////////////////////////////////////////////////////
 
         #define SHT_PROGBITS 0x1
 
-        EXTERN init
+        PUBLIC dip
 
-        PUBLIC main
-
-// D:\Study\car\myFirstCar\myFirstCar_fourWheel\app\myFirstCar.c
+// D:\Study\car\myFirstCar\myFirstCar_fourWheel\app\switch.c
 //    1 #include"include.h"
-//    2 
+//    2 enum dip_enum{
+//    3     launch_dip,
+//    4     stop_dip
+//    5 };
 
-        SECTION `.text`:CODE:NOROOT(1)
-        THUMB
-//    3 void main(void)
-//    4 {
-main:
-        PUSH     {R7,LR}
-//    5   DisableInterrupts; //关闭中断
-        CPSID    I
-//    6   init();            //初始化函数
-        BL       init
-//    7   EnableInterrupts;  //启动中断
-        CPSIE    I
-//    8   while (1)
-??main_0:
-        B.N      ??main_0
-//    9   {
-//   10   }
-//   11 }
+        SECTION `.bss`:DATA:REORDER:NOROOT(2)
+//    6 uint8 dip[8]={0};
+dip:
+        DS8 8
 
         SECTION `.iar_vfe_header`:DATA:NOALLOC:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
@@ -91,9 +77,9 @@ main:
 
         END
 // 
-// 12 bytes in section .text
+// 8 bytes in section .bss
 // 
-// 12 bytes of CODE memory
+// 8 bytes of DATA memory
 //
 //Errors: none
 //Warnings: none

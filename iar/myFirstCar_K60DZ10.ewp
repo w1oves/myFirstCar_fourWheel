@@ -2927,7 +2927,19 @@
       <name>$PROJ_DIR$\..\app\k60_card.h</name>
     </file>
     <file>
+      <name>$PROJ_DIR$\..\app\motor.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\app\motor.h</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\app\myFirstCar.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\app\switch.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\app\switch.h</name>
     </file>
     <file>
       <name>$PROJ_DIR$\..\app\uart.c</name>

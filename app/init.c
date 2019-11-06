@@ -5,6 +5,7 @@ void init(void)
 {
     uart_init();
     switch_init();
+    motor_init();
 }
 
 /********************对串口通信进行初始化********************/
@@ -35,4 +36,33 @@ void switch_init(void)
     gpio_switch_struct.GPIO_Dir = DIR_INPUT;                         //输入
     gpio_switch_struct.GPIO_PinControl = INPUT_PULL_DOWN | IRQC_DIS; //输入内部下拉，禁止中断和DMA请求
     LPLD_GPIO_Init(gpio_switch_struct);
+}
+
+/********************对电机模块进行初始化********************/
+FTM_InitTypeDef ftm_motor_init_struct;
+void motor_init(void)
+{
+    ftm_motor_init_struct.FTM_Ftmx = FTM0;                   //电机 左  PTC1    ftm_motor_ch0
+    ftm_motor_init_struct.FTM_Mode = FTM_MODE_PWM;           //设置为PWM输出模式
+    ftm_motor_init_struct.FTM_PwmFreq = 10000;               //设置输出频率为10000HZ
+    LPLD_FTM_Init(ftm_motor_init_struct);                    //初始化
+    LPLD_FTM_PWM_Enable(FTM0, FTM_Ch0, 0, PTC1, ALIGN_LEFT); //启用FTM0_ch0通道，初始占空比为0，对应引脚为PTC1，脉冲对齐方式为左对齐
+                                                             //
+    ftm_motor_init_struct.FTM_Ftmx = FTM0;                   //电机  左  PTC2    ftm_motor_ch1
+    ftm_motor_init_struct.FTM_Mode = FTM_MODE_PWM;           //
+    ftm_motor_init_struct.FTM_PwmFreq = 10000;               //
+    LPLD_FTM_Init(ftm_motor_init_struct);                    //
+    LPLD_FTM_PWM_Enable(FTM0, FTM_Ch1, 0, PTC2, ALIGN_LEFT); //
+                                                             //
+    ftm_motor_init_struct.FTM_Ftmx = FTM0;                   //电机  右  PTC3    ftm_motor_ch2
+    ftm_motor_init_struct.FTM_Mode = FTM_MODE_PWM;           //
+    ftm_motor_init_struct.FTM_PwmFreq = 10000;               //
+    LPLD_FTM_Init(ftm_motor_init_struct);                    //
+    LPLD_FTM_PWM_Enable(FTM0, FTM_Ch2, 0, PTC3, ALIGN_LEFT); //
+
+    ftm_motor_init_struct.FTM_Ftmx = FTM0;                   //电机  右  PTC4    ftm_motor_ch3
+    ftm_motor_init_struct.FTM_Mode = FTM_MODE_PWM;           //
+    ftm_motor_init_struct.FTM_PwmFreq = 10000;               //
+    LPLD_FTM_Init(ftm_motor_init_struct);                    //
+    LPLD_FTM_PWM_Enable(FTM0, FTM_Ch3, 0, PTC4, ALIGN_LEFT); //
 }
