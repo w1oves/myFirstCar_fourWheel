@@ -2936,6 +2936,12 @@
       <name>$PROJ_DIR$\..\app\myFirstCar.c</name>
     </file>
     <file>
+      <name>$PROJ_DIR$\..\app\servo.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\app\servo.h</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\app\switch.c</name>
     </file>
     <file>

@@ -4,6 +4,7 @@
 #include "uart.h"
 #include "switch.h"
 #include "motor.h"
+#include "servo.h"
 
 /********************串口变量********************/
 extern UART_Type *uartCom;

@@ -7,5 +7,6 @@ void main(void)
   EnableInterrupts;  //启动中断
   while (1)
   {
+    motor_left_turn();
   }
 }
