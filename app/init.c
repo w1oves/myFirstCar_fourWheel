@@ -42,27 +42,31 @@ void switch_init(void)
 FTM_InitTypeDef ftm_motor_init_struct;
 void motor_init(void)
 {
-    ftm_motor_init_struct.FTM_Ftmx = FTM0;                   //电机 左  PTC1    ftm_motor_ch0
+    //左轮-
+    ftm_motor_init_struct.FTM_Ftmx = MOTOR_FTM;                   //电机 左  PTC1    ftm_motor_ch0
     ftm_motor_init_struct.FTM_Mode = FTM_MODE_PWM;           //设置为PWM输出模式
     ftm_motor_init_struct.FTM_PwmFreq = 10000;               //设置输出频率为10000HZ
     LPLD_FTM_Init(ftm_motor_init_struct);                    //初始化
-    LPLD_FTM_PWM_Enable(FTM0, FTM_Ch0, 0, PTC1, ALIGN_LEFT); //启用FTM0_ch0通道，初始占空比为0，对应引脚为PTC1，脉冲对齐方式为左对齐
+    LPLD_FTM_PWM_Enable(MOTOR_FTM, MOTOR_CH_LEFT_PLUS, 0, PTC1, ALIGN_LEFT); //启用FTM0_ch0通道，初始占空比为0，对应引脚为PTC1，脉冲对齐方式为左对齐
                                                              //
-    ftm_motor_init_struct.FTM_Ftmx = FTM0;                   //电机  左  PTC2    ftm_motor_ch1
+    //左轮+
+    ftm_motor_init_struct.FTM_Ftmx = MOTOR_FTM;                   //电机  左  PTC2    ftm_motor_ch1
     ftm_motor_init_struct.FTM_Mode = FTM_MODE_PWM;           //
     ftm_motor_init_struct.FTM_PwmFreq = 10000;               //
     LPLD_FTM_Init(ftm_motor_init_struct);                    //
-    LPLD_FTM_PWM_Enable(FTM0, FTM_Ch1, 0, PTC2, ALIGN_LEFT); //
+    LPLD_FTM_PWM_Enable(MOTOR_FTM, MOTOR_CH_LEFT_MINUS, 0, PTC2, ALIGN_LEFT); //
                                                              //
-    ftm_motor_init_struct.FTM_Ftmx = FTM0;                   //电机  右  PTC3    ftm_motor_ch2
+    //右轮-
+    ftm_motor_init_struct.FTM_Ftmx = MOTOR_FTM;                   //电机  右  PTC3    ftm_motor_ch2
     ftm_motor_init_struct.FTM_Mode = FTM_MODE_PWM;           //
     ftm_motor_init_struct.FTM_PwmFreq = 10000;               //
     LPLD_FTM_Init(ftm_motor_init_struct);                    //
-    LPLD_FTM_PWM_Enable(FTM0, FTM_Ch2, 0, PTC3, ALIGN_LEFT); //
-
-    ftm_motor_init_struct.FTM_Ftmx = FTM0;                   //电机  右  PTC4    ftm_motor_ch3
+    LPLD_FTM_PWM_Enable(MOTOR_FTM, MOTOR_CH_RIGHT_PLUS, 0, PTC3, ALIGN_LEFT); //
+                                                              //
+    //右轮+
+    ftm_motor_init_struct.FTM_Ftmx = MOTOR_FTM;                   //电机  右  PTC4    ftm_motor_ch3
     ftm_motor_init_struct.FTM_Mode = FTM_MODE_PWM;           //
     ftm_motor_init_struct.FTM_PwmFreq = 10000;               //
     LPLD_FTM_Init(ftm_motor_init_struct);                    //
-    LPLD_FTM_PWM_Enable(FTM0, FTM_Ch3, 0, PTC4, ALIGN_LEFT); //
+    LPLD_FTM_PWM_Enable(MOTOR_FTM, MOTOR_CH_RIGHT_MINUS, 0, PTC4, ALIGN_LEFT); //
 }
