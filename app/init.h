@@ -7,4 +7,5 @@ void switch_init(void);
 void motor_init(void);
 void servo_init(void);
 void camera_init(void);
+void DMA_TransmitInit();
 #endif

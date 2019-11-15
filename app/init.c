@@ -82,16 +82,62 @@ void servo_init(void)
 
     LPLD_FTM_Init(ftm_servo_init_struct);
 
-    LPLD_FTM_PWM_Enable(FTM1,       //使用FTM1
-                        FTM_Ch1,    //使能Ch0通道
+    LPLD_FTM_PWM_Enable(FTM1,             //使用FTM1
+                        FTM_Ch1,          //使能Ch0通道
                         SERVO_ZERO_POINT, //初始化角度0度
-                        PTB1,       //使用Ch1通道的PTC1引脚
-                        ALIGN_LEFT  //脉宽左对齐
+                        PTB1,             //使用Ch1通道的PTC1引脚
+                        ALIGN_LEFT        //脉宽左对齐
     );
 }
 
 /********************对摄像头模块进行初始化********************/
+GPIO_InitTypeDef Camera1DataPin;
+GPIO_InitTypeDef Camera1Pclk;
+GPIO_InitTypeDef Camera1Vsyn;
 void camera_init(void)
 {
-    
+    SCCB_GPIO_Init();                    // 配置 PTA26/PTA27为GPIO功能,输出,高电平，禁用中断
+    while (OV7725_eagle_reg_init() == 0) //初始化成功
+        ;
+    //GPIO_InitTypeDef Camera1DataPin;            //定义第一个摄像头引脚，作为输出功能
+    Camera1DataPin.GPIO_PTx = PTC;                              //PORT:C
+    Camera1DataPin.GPIO_Pins = GPIO_Pin8_15;                    //PIN:8-15
+    Camera1DataPin.GPIO_Dir = DIR_INPUT;                        //端口方向为输入
+    Camera1DataPin.GPIO_Output = OUTPUT_L;                      //初始化时输出低电平
+    Camera1DataPin.GPIO_PinControl = IRQC_DIS | INPUT_PULL_DIS; //禁用中断请求，禁用PULL
+    LPLD_GPIO_Init(Camera1DataPin);
+
+    //GPIO_InitTypeDef Camera1Pclk;            //定义第一个摄像头像素中断引脚
+    Camera1Pclk.GPIO_PTx = PTE;                                                  //PORT:E
+    Camera1Pclk.GPIO_Pins = GPIO_Pin0;                                           //PIN:0
+    Camera1Pclk.GPIO_Dir = DIR_INPUT;                                            //端口方向为输入
+    Camera1Pclk.GPIO_Output = OUTPUT_L;                                          //初始化时输出低电平
+    Camera1Pclk.GPIO_PinControl = IRQC_DMARI | INPUT_PULL_DOWN | INPUT_PULL_DIS; //输入上拉上升沿产生DMA请求
+    //question:输入上拉与禁止PULL同时使用，疑为错误
+    LPLD_GPIO_Init(Camera1Pclk);
+
+    //GPIO_InitTypeDef Camera1Vsyn;            //定义第一个摄像头场中断引脚
+    Camera1Vsyn.GPIO_PTx = PTC;                                            //PORT:C
+    Camera1Vsyn.GPIO_Pins = GPIO_Pin16;                                    //PIN:16
+    Camera1Vsyn.GPIO_Dir = DIR_INPUT;                                      //端口方向为输入
+    Camera1Vsyn.GPIO_Output = OUTPUT_L;                                    //初始化时输出低电平
+    Camera1Vsyn.GPIO_PinControl = IRQC_RI | INPUT_PULL_DOWN | INPUT_PF_EN; //上升沿触发外部中断，开启上拉或下拉电阻,使能低通滤波器
+    Camera1Vsyn.GPIO_Isr = vsy_isr;                                        //外部中断回调函数-unFinished
+    LPLD_GPIO_Init(Camera1Vsyn);
+    LPLD_GPIO_EnableIrq(Camera1Vsyn);
+}
+//DMA初始化
+DMA_InitTypeDef Camera1DMAPin;
+void DMA_TransmitInit()
+{
+    Camera1DMAPin.DMA_CHx = DMA_CH0; //选择DMA通道0
+    Camera1DMAPin.DMA_Req = PORTE_DMAREQ;
+    Camera1DMAPin.DMA_MajorLoopCnt = V * H / 8;
+    Camera1DMAPin.DMA_MinorByteCnt = 1;
+    Camera1DMAPin.DMA_SourceAddr = (uint32)&PTC->PDIR + 1;
+    Camera1DMAPin.DMA_SourceAddrOffset = 0;
+    Camera1DMAPin.DMA_DestAddr = (uint32)Pix_Data;
+    Camera1DMAPin.DMA_DestAddrOffset = 1;
+    Camera1DMAPin.DMA_AutoDisableReq = TRUE;
+    LPLD_DMA_Init(Camera1DMAPin);
 }
