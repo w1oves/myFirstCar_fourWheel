@@ -1,4 +1,4 @@
 #ifndef __ISR
 #define __ISR
-#include "include.h"
+void vsy_isr();
 #endif

@@ -19,3 +19,4 @@ extern uint8 dip[8];
 #define H CAMERA_H //采集行数
 #define V CAMERA_W // 采集点数
 extern uint8 Pix_Data[H][V / 8];
+extern uint8 image_getted; // 图像采集完成标志，处理后置0
