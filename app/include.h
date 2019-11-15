@@ -6,6 +6,7 @@
 #include "motor.h"
 #include "servo.h"
 #include "eagle.h"
+#include "SCCB.h"
 
 /********************串口变量********************/
 extern UART_Type *uartCom;

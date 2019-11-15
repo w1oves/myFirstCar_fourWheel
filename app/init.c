@@ -89,3 +89,9 @@ void servo_init(void)
                         ALIGN_LEFT  //脉宽左对齐
     );
 }
+
+/********************对摄像头模块进行初始化********************/
+void camera_init(void)
+{
+    
+}
