@@ -7,6 +7,8 @@ void init(void)
     switch_init();
     motor_init();
     servo_init();
+    camera_init();
+    DMA_TransmitInit();
 }
 
 /********************对串口通信进行初始化********************/
@@ -130,14 +132,14 @@ void camera_init(void)
 DMA_InitTypeDef Camera1DMAPin;
 void DMA_TransmitInit()
 {
-    Camera1DMAPin.DMA_CHx = DMA_CH0; //选择DMA通道0
-    Camera1DMAPin.DMA_Req = PORTE_DMAREQ;
-    Camera1DMAPin.DMA_MajorLoopCnt = V * H / 8;
-    Camera1DMAPin.DMA_MinorByteCnt = 1;
-    Camera1DMAPin.DMA_SourceAddr = (uint32)&PTC->PDIR + 1;
-    Camera1DMAPin.DMA_SourceAddrOffset = 0;
-    Camera1DMAPin.DMA_DestAddr = (uint32)Pix_Data;
-    Camera1DMAPin.DMA_DestAddrOffset = 1;
-    Camera1DMAPin.DMA_AutoDisableReq = TRUE;
+    Camera1DMAPin.DMA_CHx = DMA_CH0;                       //选择DMA通道0
+    Camera1DMAPin.DMA_Req = PORTE_DMAREQ;                  //选择DMA通道请求源为PROT:E
+    Camera1DMAPin.DMA_MajorLoopCnt = V * H / 8;            //配置主循环计数为总像素数除以8，即总字节数
+    Camera1DMAPin.DMA_MinorByteCnt = 1;                    //配置次循环传输字节数为1，即一次传输一个字节
+    Camera1DMAPin.DMA_SourceAddr = (uint32)&PTC->PDIR + 1; //配置源数据地址为PROT:C的输入寄存器的地址的高位
+    Camera1DMAPin.DMA_SourceAddrOffset = 0;                //配置每次读取后的偏移量，这里不需要偏移，每次固定读取该寄存器
+    Camera1DMAPin.DMA_DestAddr = (uint32)Pix_Data;         //配置目的数据地址为：Pix_Data数组
+    Camera1DMAPin.DMA_DestAddrOffset = 1;                  //配置目的数据地址每次传输后偏移一个字节
+    Camera1DMAPin.DMA_AutoDisableReq = TRUE;               //使能自动禁用请求，使能后通道请求将在主循环结束后禁用
     LPLD_DMA_Init(Camera1DMAPin);
 }
