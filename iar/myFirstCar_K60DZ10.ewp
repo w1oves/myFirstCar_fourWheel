@@ -2915,6 +2915,12 @@
   <group>
     <name>app</name>
     <file>
+      <name>$PROJ_DIR$\..\app\eagle.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\app\eagle.h</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\app\include.h</name>
     </file>
     <file>
@@ -2922,6 +2928,12 @@
     </file>
     <file>
       <name>$PROJ_DIR$\..\app\init.h</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\app\isr.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\app\isr.h</name>
     </file>
     <file>
       <name>$PROJ_DIR$\..\app\k60_card.h</name>
@@ -2934,6 +2946,15 @@
     </file>
     <file>
       <name>$PROJ_DIR$\..\app\myFirstCar.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\app\OV7725_REG.h</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\app\SCCB.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\app\SCCB.h</name>
     </file>
     <file>
       <name>$PROJ_DIR$\..\app\servo.c</name>
