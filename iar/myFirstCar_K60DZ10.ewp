@@ -2921,6 +2921,12 @@
       <name>$PROJ_DIR$\..\app\eagle.h</name>
     </file>
     <file>
+      <name>$PROJ_DIR$\..\app\imagePreDeal.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\app\imagePreDeal.h</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\app\include.h</name>
     </file>
     <file>
