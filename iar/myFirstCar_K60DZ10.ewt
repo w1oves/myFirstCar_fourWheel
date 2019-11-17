@@ -3155,6 +3155,12 @@
       <name>$PROJ_DIR$\..\app\imagePreDeal.h</name>
     </file>
     <file>
+      <name>$PROJ_DIR$\..\app\imageSend.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\app\imageSend.h</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\app\include.h</name>
     </file>
     <file>
