@@ -3,3 +3,7 @@ void uartIsr()
 {
     LPLD_UART_PutCharArr(uartCom,"Hello World",12);
 }
+void bluetoothIsr()
+{
+    LPLD_GPIO_Output_b(PTA, 15, 1);
+}

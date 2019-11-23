@@ -3,12 +3,15 @@
 /********************对车内所有部件进行初始化********************/
 void init(void)
 {
-    uart_init();
+    blue_init();
     switch_init();
+    led_init();
     motor_init();
     servo_init();
+#if TEST != NO_CAMERA
     camera_init();
     DMA_TransmitInit();
+#endif
 }
 
 /********************对串口通信进行初始化********************/
@@ -29,6 +32,29 @@ void uart_init(void)
                                               //
     uartCom = UART4;                          //端口设置
 }
+void blue_init() //蓝牙初始化函数
+{
+    uart_init_struct.UART_Uartx = UART4;
+    uart_init_struct.UART_BaudRate = 115200;
+    uart_init_struct.UART_RxPin = PTE25;
+    uart_init_struct.UART_TxPin = PTE24;
+    uart_init_struct.UART_RxIntEnable = TRUE;   //使能接收中断
+    uart_init_struct.UART_RxIsr = bluetoothIsr; //设置接收中断函数
+    LPLD_UART_Init(uart_init_struct);
+    LPLD_UART_EnableIrq(uart_init_struct);
+
+    uart_init_struct.UART_Uartx = UART0;
+    uart_init_struct.UART_BaudRate = 9600;
+    uart_init_struct.UART_RxPin = PTA15;
+    uart_init_struct.UART_TxPin = PTA14;
+    uart_init_struct.UART_RxIntEnable = TRUE; //使能接收中断
+    uart_init_struct.UART_RxIsr = uartIsr;    //设置接收中断函数
+
+    uartCom = UART4;
+    //初始化UART
+    LPLD_UART_Init(uart_init_struct);
+    LPLD_UART_EnableIrq(uart_init_struct);
+}
 
 /********************对拨码开关进行初始化********************/
 GPIO_InitTypeDef gpio_switch_struct;
@@ -39,6 +65,16 @@ void switch_init(void)
     gpio_switch_struct.GPIO_Dir = DIR_INPUT;                         //输入
     gpio_switch_struct.GPIO_PinControl = INPUT_PULL_DOWN | IRQC_DIS; //输入内部下拉，禁止中断和DMA请求
     LPLD_GPIO_Init(gpio_switch_struct);
+}
+GPIO_InitTypeDef gpio_led_struct;
+void led_init(void)
+{
+    gpio_led_struct.GPIO_PTx = PTA;         //规定端口为PORTA
+    gpio_led_struct.GPIO_Pins = GPIO_Pin15; //规定
+    gpio_led_struct.GPIO_Dir = DIR_OUTPUT;  //输出
+    gpio_led_struct.GPIO_Output = OUTPUT_H;
+    gpio_led_struct.GPIO_PinControl = IRQC_DIS; //禁止中断和DMA请求
+    LPLD_GPIO_Init(gpio_led_struct);
 }
 
 /********************对电机模块进行初始化********************/
