@@ -89,7 +89,7 @@
         </option>
         <option>
           <name>OGChipSelectEditMenu</name>
-          <state>MK60DN512Zxxx10	Freescale MK60DN512Zxxx10</state>
+          <state>MK60DN512xxx10	Freescale MK60DN512xxx10</state>
         </option>
         <option>
           <name>GenLowLevelInterface</name>
@@ -149,7 +149,7 @@
         </option>
         <option>
           <name>GFPUDeviceSlave</name>
-          <state>MK60DN512Zxxx10	Freescale MK60DN512Zxxx10</state>
+          <state>MK60DN512xxx10	Freescale MK60DN512xxx10</state>
         </option>
         <option>
           <name>FPU2</name>

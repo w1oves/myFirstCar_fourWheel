@@ -9,7 +9,7 @@ TriggerName=main
 LimitSize=0
 ByteLimit=50
 [DebugChecksum]
-Checksum=1594435168
+Checksum=-451927497
 [JLinkDriver]
 CStepIntDis=_ 0
 TraceBufferSize=0x00010000
@@ -26,23 +26,37 @@ ShowArgs=0
 MixedMode=1
 [SWOTraceHWSettings]
 OverrideDefaultClocks=0
-CpuClock=0
+CpuClock=100000000
 ClockAutoDetect=0
-ClockWanted=0
-JtagSpeed=0
-Prescaler=0
+ClockWanted=2000000
+JtagSpeed=2250000
+Prescaler=44
 TimeStampPrescIndex=0
 TimeStampPrescData=0
-PcSampCYCTAP=0
-PcSampPOSTCNT=0
+PcSampCYCTAP=1
+PcSampPOSTCNT=15
 PcSampIndex=0
 DataLogMode=0
 ITMportsEnable=0
 ITMportsTermIO=0
 ITMportsLogFile=0
-ITMlogFile=
+ITMlogFile=$PROJ_DIR$\ITM.log
 [FlashMemory]
 FlashEraseSelection=0 1 
+[Interrupts]
+Enabled=1
+[MemConfig]
+Base=1
+Manual=0
+Ddf=1
+TypeViol=0
+Stop=1
+[Simulator]
+Freq=10000000
+MultiCoreRunAll=1
+[Trace1]
+Enabled=0
+ShowSource=1
 [Trace2]
 Enabled=0
 ShowSource=0
@@ -91,18 +105,10 @@ ShowTimeLog=1
 SumEnabled=0
 ShowTimeSum=1
 SumSortOrder=0
-[PowerProbe]
-Frequency=10000
-Probe0=I0
-ProbeSetup0=2 1 1 2 0 0
-[Trace1]
-Enabled=0
-ShowSource=1
 [Disassemble mode]
 mode=0
 [Breakpoints2]
-Bp0=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\app\init.c}.136.12" 0 0 1 "" 0 "" 0
-Count=1
+Count=0
 [Log file]
 LoggingEnabled=_ 0
 LogFile=_ ""
@@ -123,3 +129,7 @@ Exclusions=
 Enabled=0
 [CallStackStripe]
 ShowTiming=1
+[PowerProbe]
+Frequency=10000
+Probe0=I0
+ProbeSetup0=2 1 1 2 0 0

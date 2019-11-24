@@ -27,7 +27,7 @@ void image_fix(uint8 *Image)
             LPLD_UART_PutChar(UART4, 0x20);
     }
     LPLD_UART_PutChar(UART4, 0x0d); //回车键
-    LPLD_UART_PutChar(UART4, 0x0a); //换行键
+   LPLD_UART_PutChar(UART4, 0x0a); //换行键
     for (i = 0; i < 10; i++)        //列数符
     {
         for (j = 0; j < 10; j++)
@@ -38,7 +38,7 @@ void image_fix(uint8 *Image)
         for (j = 0; j < 10; j++)
             LPLD_UART_PutChar(UART4, j + 0x30);
     }
-    LPLD_UART_PutChar(UART4, 0x0d);
+   LPLD_UART_PutChar(UART4, 0x0d);
     LPLD_UART_PutChar(UART4, 0x0a);
 
     for (i = 0; i < ROW; i++) //发图像
@@ -52,9 +52,9 @@ void image_fix(uint8 *Image)
                 LPLD_UART_PutChar(UART4, 0x20);
         }
         three(i);
-        LPLD_UART_PutChar(UART4, 0x0d);
+      LPLD_UART_PutChar(UART4, 0x0d);
         LPLD_UART_PutChar(UART4, 0x0a);
     }
-    LPLD_UART_PutChar(UART4, 0x0d);
+   LPLD_UART_PutChar(UART4, 0x0d);
     LPLD_UART_PutChar(UART4, 0x0a);
 }

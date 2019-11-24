@@ -14,7 +14,7 @@
 /********************测试变量********************/
 #define NO_TEST 1
 #define NO_CAMERA 2
-#define TEST NO_CAMERA
+#define TEST NO_TEST
 /********************串口变量********************/
 extern UART_Type *uartCom;
 

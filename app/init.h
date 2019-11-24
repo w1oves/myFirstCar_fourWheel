@@ -3,7 +3,7 @@
 
 void init(void);
 void uart_init(void);
-void blue_init();
+void blue_init(void);
 void switch_init(void);
 void led_init(void);
 void motor_init(void);

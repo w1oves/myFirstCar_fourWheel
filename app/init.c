@@ -35,25 +35,25 @@ void uart_init(void)
 void blue_init() //蓝牙初始化函数
 {
     uart_init_struct.UART_Uartx = UART4;
-    uart_init_struct.UART_BaudRate = 115200;
+    uart_init_struct.UART_BaudRate = 9600;
     uart_init_struct.UART_RxPin = PTE25;
     uart_init_struct.UART_TxPin = PTE24;
     uart_init_struct.UART_RxIntEnable = TRUE;   //使能接收中断
     uart_init_struct.UART_RxIsr = bluetoothIsr; //设置接收中断函数
     LPLD_UART_Init(uart_init_struct);
     LPLD_UART_EnableIrq(uart_init_struct);
-
+/*
     uart_init_struct.UART_Uartx = UART0;
     uart_init_struct.UART_BaudRate = 9600;
     uart_init_struct.UART_RxPin = PTA15;
     uart_init_struct.UART_TxPin = PTA14;
     uart_init_struct.UART_RxIntEnable = TRUE; //使能接收中断
     uart_init_struct.UART_RxIsr = uartIsr;    //设置接收中断函数
-
+*/
     uartCom = UART4;
     //初始化UART
-    LPLD_UART_Init(uart_init_struct);
-    LPLD_UART_EnableIrq(uart_init_struct);
+   // LPLD_UART_Init(uart_init_struct);
+   // LPLD_UART_EnableIrq(uart_init_struct);
 }
 
 /********************对拨码开关进行初始化********************/
