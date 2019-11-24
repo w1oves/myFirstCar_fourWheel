@@ -11,6 +11,7 @@ void init(void)
     camera_init();
     DMA_TransmitInit();
     pit0_init();
+    nvic_init()；
 }
 
 /********************对串口通信进行初始化********************/
@@ -41,7 +42,7 @@ void blue_init() //蓝牙初始化函数
     uart_init_struct.UART_RxIsr = bluetoothIsr; //设置接收中断函数
     LPLD_UART_Init(uart_init_struct);
     LPLD_UART_EnableIrq(uart_init_struct);
-/*
+    /*
     uart_init_struct.UART_Uartx = UART0;
     uart_init_struct.UART_BaudRate = 9600;
     uart_init_struct.UART_RxPin = PTA15;
@@ -51,8 +52,8 @@ void blue_init() //蓝牙初始化函数
 */
     uartCom = UART4;
     //初始化UART
-   // LPLD_UART_Init(uart_init_struct);
-   // LPLD_UART_EnableIrq(uart_init_struct);
+    // LPLD_UART_Init(uart_init_struct);
+    // LPLD_UART_EnableIrq(uart_init_struct);
 }
 
 /********************对拨码开关进行初始化********************/
@@ -183,13 +184,34 @@ PIT_InitTypeDef pit0_init_struct;
 TIME_S cartime;
 void pit0_init()
 {
-  pit0_init_struct.PIT_Pitx = PIT0;
-  pit0_init_struct.PIT_PeriodUs = 1000;
-  pit0_init_struct.PIT_Isr = pit0_isr;
-  LPLD_PIT_Init(pit0_init_struct);
-  LPLD_PIT_EnableIrq(pit0_init_struct);
+    pit0_init_struct.PIT_Pitx = PIT0;
+    pit0_init_struct.PIT_PeriodUs = 1000;
+    pit0_init_struct.PIT_Isr = pit0_isr;
+    LPLD_PIT_Init(pit0_init_struct);
+    LPLD_PIT_EnableIrq(pit0_init_struct);
 
-  cartime.ms = 0;
-  cartime.min = 0;
-  cartime.s = 0;
+    cartime.ms = 0;
+    cartime.min = 0;
+    cartime.s = 0;
+}
+
+/********************对NVIC模块进行初始化********************/
+NVIC_InitTypeDef nvic_struct;
+void nvic_init()
+{
+    nvic_struct.NVIC_IRQChannel = PORTC_IRQn; //场中断
+    nvic_struct.NVIC_IRQChannelGroupPriority = NVIC_PriorityGroup_3;
+    nvic_struct.NVIC_IRQChannelPreemptionPriority = 0;
+    nvic_struct.NVIC_IRQChannelSubPriority = 0;
+    nvic_struct.NVIC_IRQChannelEnable = TRUE;
+    LPLD_NVIC_Init(nvic_struct);
+
+    /*
+  nvic_struct.NVIC_IRQChannel = PORTA_IRQn; //超声波
+  nvic_struct.NVIC_IRQChannelGroupPriority = NVIC_PriorityGroup_3;
+  nvic_struct.NVIC_IRQChannelPreemptionPriority = 1;
+  nvic_struct.NVIC_IRQChannelSubPriority = 0;
+  nvic_struct.NVIC_IRQChannelEnable = TRUE;
+  LPLD_NVIC_Init(nvic_struct);
+  */
 }
