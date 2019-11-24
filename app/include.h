@@ -11,6 +11,7 @@
 #include "imagePreDeal.h"
 #include "imageSend.h"
 #include "function.h"
+#include "control.h"
 
 /********************测试变量********************/
 #define ALL_TEST 1
@@ -34,3 +35,8 @@ extern uint8 Image_Data[ROW][COLUMN];
 
 /********************时间变量********************/
 extern TIME_S cartime;
+
+/********************PID变量********************/
+extern PID motor;
+extern PD servo;
+extern PD servo[5];
