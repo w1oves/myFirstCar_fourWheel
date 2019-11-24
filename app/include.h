@@ -10,11 +10,11 @@
 #include "isr.h"
 #include "imagePreDeal.h"
 #include "imageSend.h"
+#include "function.h"
 
 /********************测试变量********************/
-#define NO_TEST 1
-#define NO_CAMERA 2
-#define TEST NO_TEST
+#define ALL_TEST 1
+#define TEST ALL_TEST
 /********************串口变量********************/
 extern UART_Type *uartCom;
 
@@ -31,3 +31,6 @@ extern uint8 dip[8];
 extern uint8 Pix_Data[H][V / 8]; //
 extern uint8 image_getted;       // 图像采集完成标志，处理后置0
 extern uint8 Image_Data[ROW][COLUMN];
+
+/********************时间变量********************/
+extern TIME_S cartime;

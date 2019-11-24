@@ -15,3 +15,21 @@ void vsy_isr() //场中断触发
         image_getted = 1;
     }
 }
+/********************定时器中断函数********************/
+extern PIT_InitTypeDef pit0_init_struct;
+void pit0_isr(void)
+{
+    LPLD_PIT_DisableIrq(pit0_init_struct); //关pit0中断
+    cartime.ms++;
+    if (cartime.ms % 1000 == 0)
+    {
+        cartime.ms = 0;
+        cartime.s++;
+        if (cartime.s % 60 == 0)
+        {
+            cartime.s = 0;
+            cartime.min++;
+        }
+    }
+    LPLD_PIT_EnableIrq(pit0_init_struct); //开pit0中断
+}

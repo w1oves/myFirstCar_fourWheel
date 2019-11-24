@@ -8,10 +8,9 @@ void init(void)
     led_init();
     motor_init();
     servo_init();
-#if TEST != NO_CAMERA
     camera_init();
     DMA_TransmitInit();
-#endif
+    pit0_init();
 }
 
 /********************对串口通信进行初始化********************/
@@ -178,4 +177,19 @@ void DMA_TransmitInit()
     Camera1DMAPin.DMA_DestAddrOffset = 1;                  //配置目的数据地址每次传输后偏移一个字节
     Camera1DMAPin.DMA_AutoDisableReq = TRUE;               //使能自动禁用请求，使能后通道请求将在主循环结束后禁用
     LPLD_DMA_Init(Camera1DMAPin);
+}
+/********************对定时器模块进行初始化********************/
+PIT_InitTypeDef pit0_init_struct;
+TIME_S cartime;
+void pit0_init()
+{
+  pit0_init_struct.PIT_Pitx = PIT0;
+  pit0_init_struct.PIT_PeriodUs = 1000;
+  pit0_init_struct.PIT_Isr = pit0_isr;
+  LPLD_PIT_Init(pit0_init_struct);
+  LPLD_PIT_EnableIrq(pit0_init_struct);
+
+  cartime.ms = 0;
+  cartime.min = 0;
+  cartime.s = 0;
 }

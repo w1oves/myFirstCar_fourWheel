@@ -10,4 +10,5 @@ void motor_init(void);
 void servo_init(void);
 void camera_init(void);
 void DMA_TransmitInit();
+void pit0_init();
 #endif

@@ -22,10 +22,6 @@
   <configuration>
     <name>RAM</name>
     <outputs/>
-    <forcedrebuild>
-      <name>[MULTI_TOOL]</name>
-      <tool>ILINK</tool>
-    </forcedrebuild>
   </configuration>
 </project>
 
