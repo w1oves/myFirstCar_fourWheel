@@ -5,13 +5,13 @@
 #define LEFT_TURN__SERVO 2
 #define RIGHT_TURN__SERVO 3
 #define BIG_TURN__SERVO 4
-typedef struct pid
+typedef struct 
 {
     float32 p;
     float32 i;
     float32 d;
 } PID;
-typedef struct pd
+typedef struct 
 {
     float32 p;
     float32 d;

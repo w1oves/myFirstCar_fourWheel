@@ -2915,6 +2915,12 @@
   <group>
     <name>app</name>
     <file>
+      <name>$PROJ_DIR$\..\app\control.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\app\control.h</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\app\eagle.c</name>
     </file>
     <file>

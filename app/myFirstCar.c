@@ -20,6 +20,6 @@ void main(void)
       image_fix((uint8 *)Image_Data);
     }
     //测试电机是否正常工作
-   // motor_left_turn();
+   motor_left_turn();
   }
 }
