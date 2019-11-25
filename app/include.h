@@ -27,7 +27,7 @@ extern uint8 dip[8];
 #define COLUMN 160 // 采集点数
 
 #define H CAMERA_H //采集行数
-#define V CAMERA_W // 采集点数
+#define V CAMERA_W // 采集点数s
 
 extern uint8 Pix_Data[H][V / 8]; //
 extern uint8 image_getted;       // 图像采集完成标志，处理后置0
@@ -40,3 +40,10 @@ extern TIME_S cartime;
 extern PID motor;
 extern PD servo;
 extern PD servo[5];
+
+/********************道路类型********************/
+#define STRAIGHT 1
+#define LEFT_TURN 2
+#define RIGHT_TURN 3
+#define BIG_RIGHT_TURN 4
+#define BIG_LEFT_TURN 5
