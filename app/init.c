@@ -3,13 +3,13 @@
 /********************对车内所有部件进行初始化********************/
 void init(void)
 {
-   // blue_init();
+   blue_init();
     switch_init();
     led_init();
     motor_init();
     servo_init();
-    //camera_init();
-    //DMA_TransmitInit();
+    camera_init();
+    DMA_TransmitInit();
     pit0_init();
    // nvic_init();
 }
