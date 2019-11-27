@@ -39,7 +39,7 @@ extern TIME_S cartime;
 /********************PID变量********************/
 extern PID motor;
 extern PD servo;
-extern PD servo[5];
+extern PD servo_mode[5];
 
 /********************道路类型********************/
 #define STRAIGHT 1
@@ -47,3 +47,4 @@ extern PD servo[5];
 #define RIGHT_TURN 3
 #define BIG_RIGHT_TURN 4
 #define BIG_LEFT_TURN 5
+

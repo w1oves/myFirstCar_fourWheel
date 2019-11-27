@@ -9,7 +9,7 @@ TriggerName=main
 LimitSize=0
 ByteLimit=50
 [DebugChecksum]
-Checksum=1540649620
+Checksum=-1726069612
 [JLinkDriver]
 CStepIntDis=_ 0
 TraceBufferSize=0x00010000
@@ -54,6 +54,9 @@ Stop=1
 [Simulator]
 Freq=10000000
 MultiCoreRunAll=1
+[Trace1]
+Enabled=0
+ShowSource=1
 [Trace2]
 Enabled=0
 ShowSource=0
@@ -102,10 +105,20 @@ ShowTimeLog=1
 SumEnabled=0
 ShowTimeSum=1
 SumSortOrder=0
-[PowerProbe]
-Frequency=10000
-Probe0=I0
-ProbeSetup0=2 1 1 2 0 0
+[Disassemble mode]
+mode=0
+[Breakpoints2]
+Count=0
+[Log file]
+LoggingEnabled=_ 0
+LogFile=_ ""
+Category=_ 0
+[TermIOLog]
+LoggingEnabled=_ 0
+LogFile=_ ""
+[Aliases]
+Count=0
+SuppressDialog=0
 [DriverProfiling]
 Enabled=0
 Mode=1
@@ -116,20 +129,7 @@ Exclusions=
 Enabled=0
 [CallStackStripe]
 ShowTiming=1
-[Trace1]
-Enabled=0
-ShowSource=1
-[Log file]
-LoggingEnabled=_ 0
-LogFile=_ ""
-Category=_ 0
-[TermIOLog]
-LoggingEnabled=_ 0
-LogFile=_ ""
-[Disassemble mode]
-mode=0
-[Breakpoints2]
-Count=0
-[Aliases]
-Count=0
-SuppressDialog=0
+[PowerProbe]
+Frequency=10000
+Probe0=I0
+ProbeSetup0=2 1 1 2 0 0

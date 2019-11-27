@@ -3,9 +3,7 @@
 PID motor;
 
 /********************舵机控制参数********************/
-#define SERVO_POINT 519
-#define SERVO_LEFT 620
-#define SERVO_RIGHT 430
+#define SERVO_POINT SERVO_ZERO_POINT
 PD servo;
 PD servo_mode[5];
 int16 duty;

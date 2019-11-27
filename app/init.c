@@ -3,15 +3,15 @@
 /********************对车内所有部件进行初始化********************/
 void init(void)
 {
-    blue_init();
+   // blue_init();
     switch_init();
     led_init();
     motor_init();
     servo_init();
-    camera_init();
-    DMA_TransmitInit();
+    //camera_init();
+    //DMA_TransmitInit();
     pit0_init();
-    nvic_init()；
+   // nvic_init();
 }
 
 /********************对串口通信进行初始化********************/
@@ -36,7 +36,7 @@ void blue_init() //蓝牙初始化函数
 {
     uart_init_struct.UART_Uartx = UART4;
     uart_init_struct.UART_BaudRate = 115200;
-q    uart_init_struct.UART_RxPin = PTE25;
+    uart_init_struct.UART_RxPin = PTE25;
     uart_init_struct.UART_TxPin = PTE24;
     uart_init_struct.UART_RxIntEnable = TRUE;   //使能接收中断
     uart_init_struct.UART_RxIsr = bluetoothIsr; //设置接收中断函数
@@ -82,32 +82,32 @@ FTM_InitTypeDef ftm_motor_init_struct;
 void motor_init(void)
 {
     //左轮-
-    ftm_motor_init_struct.FTM_Ftmx = MOTOR_FTM;                              //电机 左  PTC1    ftm_motor_ch0
+    ftm_motor_init_struct.FTM_Ftmx = FTM0;                              //电机 左  PTC1    ftm_motor_ch0
     ftm_motor_init_struct.FTM_Mode = FTM_MODE_PWM;                           //设置为PWM输出模式
     ftm_motor_init_struct.FTM_PwmFreq = 10000;                               //设置输出频率为10000HZ
     LPLD_FTM_Init(ftm_motor_init_struct);                                    //初始化
-    LPLD_FTM_PWM_Enable(MOTOR_FTM, MOTOR_CH_LEFT_PLUS, 0, PTC1, ALIGN_LEFT); //启用FTM0_ch0通道，初始占空比为0，对应引脚为PTC1，脉冲对齐方式为左对齐
+    LPLD_FTM_PWM_Enable(FTM0, FTM_Ch0, 0, PTC1, ALIGN_LEFT); //启用FTM0_ch0通道，初始占空比为0，对应引脚为PTC1，脉冲对齐方式为左对齐
                                                                              //
     //左轮+
-    ftm_motor_init_struct.FTM_Ftmx = MOTOR_FTM;                               //电机  左  PTC2    ftm_motor_ch1
+    ftm_motor_init_struct.FTM_Ftmx = FTM0;                               //电机  左  PTC2    ftm_motor_ch1
     ftm_motor_init_struct.FTM_Mode = FTM_MODE_PWM;                            //
     ftm_motor_init_struct.FTM_PwmFreq = 10000;                                //
     LPLD_FTM_Init(ftm_motor_init_struct);                                     //
-    LPLD_FTM_PWM_Enable(MOTOR_FTM, MOTOR_CH_LEFT_MINUS, 0, PTC2, ALIGN_LEFT); //
+    LPLD_FTM_PWM_Enable(FTM0, FTM_Ch1, 0, PTC2, ALIGN_LEFT); //
                                                                               //
     //右轮-
-    ftm_motor_init_struct.FTM_Ftmx = MOTOR_FTM;                               //电机  右  PTC3    ftm_motor_ch2
+    ftm_motor_init_struct.FTM_Ftmx = FTM0;                               //电机  右  PTC3    ftm_motor_ch2
     ftm_motor_init_struct.FTM_Mode = FTM_MODE_PWM;                            //
     ftm_motor_init_struct.FTM_PwmFreq = 10000;                                //
     LPLD_FTM_Init(ftm_motor_init_struct);                                     //
-    LPLD_FTM_PWM_Enable(MOTOR_FTM, MOTOR_CH_RIGHT_PLUS, 0, PTC3, ALIGN_LEFT); //
+    LPLD_FTM_PWM_Enable(FTM0, FTM_Ch2, 0, PTC3, ALIGN_LEFT); //
                                                                               //
     //右轮+
-    ftm_motor_init_struct.FTM_Ftmx = MOTOR_FTM;                                //电机  右  PTC4    ftm_motor_ch3
+    ftm_motor_init_struct.FTM_Ftmx = FTM0;                                //电机  右  PTC4    ftm_motor_ch3
     ftm_motor_init_struct.FTM_Mode = FTM_MODE_PWM;                             //
     ftm_motor_init_struct.FTM_PwmFreq = 10000;                                 //
     LPLD_FTM_Init(ftm_motor_init_struct);                                      //
-    LPLD_FTM_PWM_Enable(MOTOR_FTM, MOTOR_CH_RIGHT_MINUS, 0, PTC4, ALIGN_LEFT); //
+    LPLD_FTM_PWM_Enable(FTM0, FTM_Ch3, 0, PTC4, ALIGN_LEFT); //
 }
 
 /********************对舵机模块进行初始化********************/
