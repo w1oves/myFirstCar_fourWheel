@@ -17,15 +17,27 @@ void vsy_isr() //场中断触发
 }
 /********************定时器中断函数********************/
 extern PIT_InitTypeDef pit0_init_struct;
+uint8 TIME0flag_10ms=0;
+uint8 TIME0flag_20ms=0;
+uint8 TIME1flag_100ms=0;
+uint8 TIME1flag_1s=0;
 void pit0_isr(void)
 {
     LPLD_PIT_DisableIrq(pit0_init_struct); //关pit0中断
     cartime.ms++;
-    if (cartime.ms % 1000 == 0)
+    if(cartime.ms%20==0)
+    {
+       // getSpeed();
+        if(howToDo.stop==0)
+        {
+           // speed_control();
+        }
+    }
+    if (cartime.ms % 1000 == 0&&cartime.ms)
     {
         cartime.ms = 0;
         cartime.s++;
-        if (cartime.s % 60 == 0)
+        if (cartime.s % 60 == 0&&cartime.s)
         {
             cartime.s = 0;
             cartime.min++;

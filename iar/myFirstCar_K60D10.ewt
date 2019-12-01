@@ -3161,6 +3161,12 @@
       <name>$PROJ_DIR$\..\app\function.h</name>
     </file>
     <file>
+      <name>$PROJ_DIR$\..\app\getSpeed.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\app\getSpeed.h</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\app\imagePreDeal.c</name>
     </file>
     <file>
@@ -3322,6 +3328,12 @@
         </file>
         <file>
           <name>$PROJ_DIR$\..\..\..\lib\LPLD\HW\HW_GPIO.h</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\lib\LPLD\HW\HW_LPTMR.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\lib\LPLD\HW\HW_LPTMR.h</name>
         </file>
         <file>
           <name>$PROJ_DIR$\..\..\..\lib\LPLD\HW\HW_MCG.c</name>

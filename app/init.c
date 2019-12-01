@@ -12,7 +12,8 @@ void init(void)
     DMA_TransmitInit();
     pit0_init();
    nvic_init();
-   qd_init();    //初始化FTM2的正交解码功能
+   //qd_init();    //初始化FTM2的正交解码功能
+   //lptmr_init();
 }
 
 /********************对串口通信进行初始化********************/
@@ -230,4 +231,19 @@ void qd_init(void)
   FTM2->QDCTRL |= FTM_QDCTRL_QUADEN_MASK;   //启用FTM2正交解码模式
   FTM2->MODE |= FTM_MODE_FTMEN_MASK;        //FTM2EN=1
   FTM2->CNT = 0;
+}
+/********************lptmr低功耗计时器的初始化********************/
+LPTMR_InitTypeDef lptmr_init_struct;
+void lptmr_init() //lptmr低功耗计时器的初始化
+{
+  lptmr_init_struct.LPTMR_Mode = LPTMR_MODE_PLACC;
+  lptmr_init_struct.LPTMR_PluseAccInput = LPTMR_ALT2;
+  LPLD_LPTMR_Init(lptmr_init_struct);
+}
+/********************结构体的初始化********************/
+FLAG_S howToDo;
+void flag_struct_init()
+{
+    howToDo.stop=1;
+    howToDo.road=STRAIGHT;
 }

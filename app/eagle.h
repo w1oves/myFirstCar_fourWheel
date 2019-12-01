@@ -1,3 +1,5 @@
+#ifndef __EAGLE
+#define __EAGLE
 
 #include "OV7725_REG.h"
 #include "common.h"
@@ -27,3 +29,4 @@ void OV7725_EAGLE_Delay_ms(uint16 ms);
 
 uint8 OV7725_eagle_reg_init(void);
 void comfirmIIC();
+#endif

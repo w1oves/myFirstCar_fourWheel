@@ -12,12 +12,16 @@
 #include "imageSend.h"
 #include "function.h"
 #include "control.h"
+#include "getSpeed.h"
 
 /********************测试变量********************/
 #define ALL_TEST 1
 #define TEST ALL_TEST
 /********************串口变量********************/
 extern UART_Type *uartCom;
+extern uint8 sendImageContinue;
+/********************控制变量********************/
+extern FLAG_S howToDo;
 
 /********************开关变量********************/
 extern uint8 dip[8];
@@ -35,6 +39,14 @@ extern uint8 Image_Data[ROW][COLUMN];
 
 /********************时间变量********************/
 extern TIME_S cartime;
+extern uint8 TIME0flag_10ms;
+extern uint8 TIME0flag_20ms;
+extern uint8 TIME1flag_100ms;
+extern uint8 TIME1flag_1s;
+
+/********************速度变量********************/
+extern int16 rightMotorSpeed;
+extern int16 leftMotorSpeed;
 
 /********************PID变量********************/
 extern PID motor;

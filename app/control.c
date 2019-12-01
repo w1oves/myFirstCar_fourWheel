@@ -49,7 +49,6 @@ void pid_int(void)
 /********************舵机PD参数设置********************/
 void ServoPDSet(uint8 flag)
 {
-
     if (flag == STRAIGHT) //直道
     {
         servo = servo_mode[STRAIGHT__SERVO];
