@@ -12,4 +12,5 @@ void camera_init(void);
 void DMA_TransmitInit();
 void pit0_init();
 void nvic_init();
+void qd_init();
 #endif

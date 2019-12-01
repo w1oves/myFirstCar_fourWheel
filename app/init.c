@@ -11,7 +11,8 @@ void init(void)
     camera_init();
     DMA_TransmitInit();
     pit0_init();
-   // nvic_init();
+   nvic_init();
+   qd_init();    //初始化FTM2的正交解码功能
 }
 
 /********************对串口通信进行初始化********************/
@@ -84,28 +85,28 @@ void motor_init(void)
     //左轮-
     ftm_motor_init_struct.FTM_Ftmx = FTM0;                              //电机 左  PTC1    ftm_motor_ch0
     ftm_motor_init_struct.FTM_Mode = FTM_MODE_PWM;                           //设置为PWM输出模式
-    ftm_motor_init_struct.FTM_PwmFreq = 10000;                               //设置输出频率为10000HZ
+    ftm_motor_init_struct.FTM_PwmFreq = 15000;                               //设置输出频率为10000HZ
     LPLD_FTM_Init(ftm_motor_init_struct);                                    //初始化
     LPLD_FTM_PWM_Enable(FTM0, FTM_Ch0, 0, PTC1, ALIGN_LEFT); //启用FTM0_ch0通道，初始占空比为0，对应引脚为PTC1，脉冲对齐方式为左对齐
                                                                              //
     //左轮+
     ftm_motor_init_struct.FTM_Ftmx = FTM0;                               //电机  左  PTC2    ftm_motor_ch1
     ftm_motor_init_struct.FTM_Mode = FTM_MODE_PWM;                            //
-    ftm_motor_init_struct.FTM_PwmFreq = 10000;                                //
+    ftm_motor_init_struct.FTM_PwmFreq = 15000;                                //
     LPLD_FTM_Init(ftm_motor_init_struct);                                     //
     LPLD_FTM_PWM_Enable(FTM0, FTM_Ch1, 0, PTC2, ALIGN_LEFT); //
                                                                               //
     //右轮-
     ftm_motor_init_struct.FTM_Ftmx = FTM0;                               //电机  右  PTC3    ftm_motor_ch2
     ftm_motor_init_struct.FTM_Mode = FTM_MODE_PWM;                            //
-    ftm_motor_init_struct.FTM_PwmFreq = 10000;                                //
+    ftm_motor_init_struct.FTM_PwmFreq = 15000;                                //
     LPLD_FTM_Init(ftm_motor_init_struct);                                     //
     LPLD_FTM_PWM_Enable(FTM0, FTM_Ch2, 0, PTC3, ALIGN_LEFT); //
                                                                               //
     //右轮+
     ftm_motor_init_struct.FTM_Ftmx = FTM0;                                //电机  右  PTC4    ftm_motor_ch3
     ftm_motor_init_struct.FTM_Mode = FTM_MODE_PWM;                             //
-    ftm_motor_init_struct.FTM_PwmFreq = 10000;                                 //
+    ftm_motor_init_struct.FTM_PwmFreq = 15000;                                 //
     LPLD_FTM_Init(ftm_motor_init_struct);                                      //
     LPLD_FTM_PWM_Enable(FTM0, FTM_Ch3, 0, PTC4, ALIGN_LEFT); //
 }
@@ -214,4 +215,19 @@ void nvic_init()
   nvic_struct.NVIC_IRQChannelEnable = TRUE;
   LPLD_NVIC_Init(nvic_struct);
   */
+}
+/********************初始化FTM2的正交解码功能********************/
+void qd_init(void)
+{
+
+  PORTB->PCR[18] = PORT_PCR_MUX(6);         // 设置引脚 B18引脚为FTM2_PHA功能
+  PORTB->PCR[19] = PORT_PCR_MUX(6);         // 设置引脚 B19引脚为FTM2_PHB功能  //单项接地
+  SIM->SCGC3 |= SIM_SCGC3_FTM2_MASK;        //使能FTM2时钟
+  FTM2->MODE |= FTM_MODE_WPDIS_MASK;        //写保护禁止
+  FTM2->QDCTRL |= FTM_QDCTRL_QUADMODE_MASK; //AB相同时确定方向和计数值
+  FTM2->CNTIN = 0;                          //FTM2计数器初始值为0
+  FTM2->MOD = 65535;                        //结束值
+  FTM2->QDCTRL |= FTM_QDCTRL_QUADEN_MASK;   //启用FTM2正交解码模式
+  FTM2->MODE |= FTM_MODE_FTMEN_MASK;        //FTM2EN=1
+  FTM2->CNT = 0;
 }

@@ -96,6 +96,7 @@ void SystemInit (void) {
   LPLD_UART_Init(term_port_structure);
   
   //打印系统调试信息
+  /*
 #ifdef DEBUG_PRINT     
   printf("\r\n");   
   printf("*********** 基于拉普兰德K60底层库 http://www.lpld.cn ***********\r\n");
@@ -107,6 +108,7 @@ void SystemInit (void) {
   Diagnostic_Reset_Source();
   printf("********************************************************************\r\n");
 #endif
+*/
   
 }
 

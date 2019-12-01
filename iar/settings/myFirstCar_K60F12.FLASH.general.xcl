@@ -2,11 +2,13 @@
 
 "D:\Study Software\arm\bin\armjlink.dll" 
 
-"D:\Study\car\myFirstCar\myFirstCar_fourWheel\iar\FLASH\Exe\myFirstCar_K60D10.out" 
+"D:\Study\car\myFirstCar\myFirstCar_fourWheel\iar\FLASH\Exe\myFirstCar_K60F12.out" 
 
 --plugin "D:\Study Software\arm\bin\armbat.dll" 
 
 --device_macro "D:\Study Software\arm\config\debugger\Freescale\Kxx.dmac" 
+
+--flash_loader "D:\Study Software\arm\config\flashloader\Freescale\FlashK60Fxxx128K.board" 
 
 
 

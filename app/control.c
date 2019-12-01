@@ -81,3 +81,4 @@ void ServoPd(int16 nowError)
         duty = SERVO_LEFT;
     LPLD_FTM_PWM_ChangeDuty(FTM1, FTM_Ch1, duty); //B1口
 }
+

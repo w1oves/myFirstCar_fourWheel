@@ -3324,6 +3324,12 @@
           <name>$PROJ_DIR$\..\..\..\lib\LPLD\HW\HW_MCG.h</name>
         </file>
         <file>
+          <name>$PROJ_DIR$\..\lib\LPLD\HW\HW_NVIC.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\lib\LPLD\HW\HW_NVIC.h</name>
+        </file>
+        <file>
           <name>$PROJ_DIR$\..\..\..\lib\LPLD\HW\HW_PIT.c</name>
         </file>
         <file>

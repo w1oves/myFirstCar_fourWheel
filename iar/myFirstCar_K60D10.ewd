@@ -89,7 +89,7 @@
         </option>
         <option>
           <name>OCLastSavedByProductVersion</name>
-          <state>7.20.2.7418</state>
+          <state>7.40.3.8937</state>
         </option>
         <option>
           <name>OCDownloadAttachToProgram</name>
@@ -1574,7 +1574,7 @@
         </option>
         <option>
           <name>OCLastSavedByProductVersion</name>
-          <state>7.20.2.7418</state>
+          <state>7.40.3.8937</state>
         </option>
         <option>
           <name>OCDownloadAttachToProgram</name>
@@ -1582,7 +1582,7 @@
         </option>
         <option>
           <name>UseFlashLoader</name>
-          <state>1</state>
+          <state>0</state>
         </option>
         <option>
           <name>CLowLevel</name>
