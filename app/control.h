@@ -5,18 +5,19 @@
 #define LEFT_TURN__SERVO 2
 #define RIGHT_TURN__SERVO 3
 #define BIG_TURN__SERVO 4
-typedef struct 
-{
-    float32 p;
-    float32 i;
-    float32 d;
-} PID;
-typedef struct 
-{
-    float32 p;
-    float32 d;
-} PD;
+// typedef struct 
+// {
+//     float32 p;
+//     float32 i;
+//     float32 d;
+// } PID;
+// typedef struct 
+// {
+//     float32 p;
+//     float32 d;
+// } PD;
 void pid_int(void);
 void ServoPDSet(uint8 flag);
 void speedControl(int16 differ);
+void motor_pid(int16 diff);
 #endif

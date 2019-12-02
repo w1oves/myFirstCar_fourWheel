@@ -2927,6 +2927,12 @@
       <name>$PROJ_DIR$\..\app\eagle.h</name>
     </file>
     <file>
+      <name>$PROJ_DIR$\..\app\flash.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\app\flash.h</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\app\funciton.c</name>
     </file>
     <file>

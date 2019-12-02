@@ -50,10 +50,17 @@ extern int16 leftMotorSpeed;
 extern int16 midMotorSpeed;
 extern int16 speed_hope;
 
+
+
 /********************PID变量********************/
-extern PID motor;
-extern PD servo;
-extern PD servo_mode[5];
+// extern PID motor;
+// extern PD servo;
+// extern PD servo_mode[5];
+extern float servoKp5[5];
+extern float servoKd5[5];
+extern float motorKp;
+extern float motorKd;
+extern float motorKi;
 
 /********************道路类型********************/
 #define STRAIGHT 1
@@ -61,4 +68,3 @@ extern PD servo_mode[5];
 #define RIGHT_TURN 3
 #define BIG_RIGHT_TURN 4
 #define BIG_LEFT_TURN 5
-
