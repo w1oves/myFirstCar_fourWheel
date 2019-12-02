@@ -47,6 +47,8 @@ extern uint8 TIME1flag_1s;
 /********************速度变量********************/
 extern int16 rightMotorSpeed;
 extern int16 leftMotorSpeed;
+extern int16 midMotorSpeed;
+extern int16 speed_hope;
 
 /********************PID变量********************/
 extern PID motor;

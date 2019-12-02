@@ -18,4 +18,5 @@ typedef struct
 } PD;
 void pid_int(void);
 void ServoPDSet(uint8 flag);
+void speedControl(int16 differ);
 #endif

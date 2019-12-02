@@ -11,4 +11,6 @@ typedef struct flag_struct
     uint8 stop;
     uint8 road;
 }FLAG_S;
+uint8 abs(int16);
+uint8 twoAbs(uint8,uint8);//绝对值
 #endif
