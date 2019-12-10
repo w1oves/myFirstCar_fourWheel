@@ -210,3 +210,19 @@ void motor_pid(int16 diff)
     LPLD_FTM_PWM_ChangeDuty(FTM0, FTM_Ch2, 0);
     LPLD_FTM_PWM_ChangeDuty(FTM0, FTM_Ch3, adjustLeft);
 }
+  // LPLD_FTM_PWM_ChangeDuty(FTM0, FTM_Ch0, 0);//ok,fan left-
+  // LPLD_FTM_PWM_ChangeDuty(FTM0, FTM_Ch1, 6000);//ok,zheng left+
+  // LPLD_FTM_PWM_ChangeDuty(FTM0, FTM_Ch2, 6000);//ok,zheng right+
+  // LPLD_FTM_PWM_ChangeDuty(FTM0, FTM_Ch3, 0);//ok,fan right-
+  // while (1)
+  // {
+  //   /* code */
+  // }
+
+  /*
+    CH1:L-
+    CH2:L+
+    CH3:R+
+    CH4:R-
+ */
+  //LPLD_FTM_PWM_ChangeDuty(FTM1, FTM_Ch1, 330); //B1口

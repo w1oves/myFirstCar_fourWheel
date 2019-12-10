@@ -1,4 +1,5 @@
 #include "include.h"
+extern uint8 leftLine[ROW], middleLine[ROW], rightLine[ROW];
 void three(uint16 num)
 {
     uint8 d = num / 1000;
@@ -58,3 +59,28 @@ void image_fix(uint8 *Image)
    LPLD_UART_PutChar(UART4, 0x0d);
     LPLD_UART_PutChar(UART4, 0x0a);
 }
+
+
+void sendLine()
+{
+  uint8 i, j;
+  for (i = 0; i < ROW; i++) //边线，中线发送
+  {
+
+    for (j = 0; j < COLUMN; j++)
+    {
+      if (j == leftLine[i])
+        LPLD_UART_PutChar(UART4, 0x3c); //'<'
+      else if (j == middleLine[i])
+        LPLD_UART_PutChar(UART4, 0x3d); //'='
+      else if (j == rightLine[i])
+        LPLD_UART_PutChar(UART4, 0x3e); //'>'
+      else
+        LPLD_UART_PutChar(UART4, 0x20);//' '
+    }
+    three(i);
+    LPLD_UART_PutChar(UART4, 0X0d);//'\n'
+    LPLD_UART_PutChar(UART4, 0X0a);//'\n'
+  }
+}
+
