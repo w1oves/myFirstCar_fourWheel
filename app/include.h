@@ -13,13 +13,16 @@
 #include "function.h"
 #include "control.h"
 #include "getSpeed.h"
+#include "imageDeal.h"
 
 /********************测试变量********************/
-#define ALL_TEST 1
-#define TEST ALL_TEST
+#define TEST 1
 /********************串口变量********************/
 extern UART_Type *uartCom;
 extern uint8 sendImageContinue;
+extern uint8 sendImageOne;
+extern uint8 sendLine_flag;
+extern uint8 sendRoad_flag;
 /********************控制变量********************/
 extern FLAG_S howToDo;
 
@@ -49,8 +52,6 @@ extern int16 rightMotorSpeed;
 extern int16 leftMotorSpeed;
 extern int16 midMotorSpeed;
 extern int16 speed_hope;
-
-
 
 /********************PID变量********************/
 // extern PID motor;

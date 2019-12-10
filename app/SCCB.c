@@ -194,13 +194,13 @@ int SCCB_ReadByte_one(uint8 *pBuffer , uint16 length , uint8 ReadAddress)
 {
   if(!SCCB_Start())
   {
-    printf("\n:a");
+    //printf("\n:a");
     return 0;
   }
   SCCB_SendByte(DEV_ADR);
   if(!SCCB_WaitAck())
   {
-    printf("\n:b");
+   // printf("\n:b");
     SCCB_Stop();
     return 0;
   }

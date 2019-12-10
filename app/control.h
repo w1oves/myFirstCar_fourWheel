@@ -20,4 +20,5 @@ void pid_int(void);
 void ServoPDSet(uint8 flag);
 void speedControl(int16 differ);
 void motor_pid(int16 diff);
+void ServoPd(int16 nowError);
 #endif

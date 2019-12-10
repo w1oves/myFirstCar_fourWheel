@@ -9,4 +9,5 @@ void motor_slow_down(void);
 void motor_left_turn(void);
 void motor_right_turn(void);
 void motor_stop(void);
+void motor_speed_go(void);
 #endif

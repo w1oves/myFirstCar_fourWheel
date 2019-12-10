@@ -2945,6 +2945,12 @@
       <name>$PROJ_DIR$\..\app\getSpeed.h</name>
     </file>
     <file>
+      <name>$PROJ_DIR$\..\app\imageDeal.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\app\imageDeal.h</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\app\imagePreDeal.c</name>
     </file>
     <file>
